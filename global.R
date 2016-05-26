@@ -24,7 +24,7 @@ doc1 <- doc_samp1 %>%
          rang = end-start+1, coverage = average_coverage) %>%
   select(chrom, start, end, rang, coverage)
 
-#doc_samp2 <- read.delim("C:/Users/Owner/Box Sync/DepthofCoverage/raw_output_lessparam/1G8_merged_sort.coverage.sample_interval_summary", header= TRUE, sep="\t", stringsAsFactors = FALSE)
+
 doc_samp2 <-read.delim("data/1G8_merged_sort.coverage.sample_interval_summary",header= TRUE, sep="\t", stringsAsFactors = FALSE)
 
 doc2 <- doc_samp2 %>%
@@ -34,17 +34,13 @@ doc2 <- doc_samp2 %>%
   select(chrom, start, end, rang, coverage)
 
 #------------------------------------------------------------------------------------
-#ExomeDepthCNV results
-# X1G6_ed <- read.delim("C:/Users/Owner/Box Sync/Analysis_CNV/ExomeDepthCNV/results_inctransthresh/1G6_exomedepth_annotated_Conrad_somaticCNV.txt", header= TRUE, sep="\t", stringsAsFactors = FALSE)
-# 
-# X1G8_ed <- read.delim("C:/Users/Owner/Box Sync/Analysis_CNV/ExomeDepthCNV/results_inctransthresh/1G8_exomedepth_annotated_Conrad_somaticCNV.txt", header= TRUE, sep="\t", stringsAsFactors = FALSE)
-# X1G6_ec <- read.delim("C:/Users/Owner/Box Sync/Analysis_CNV/ExomeCNV/results/X1G6.coverage.cnv.txt", header= TRUE, sep="\t", stringsAsFactors = FALSE)
-# X1G8_ec <- read.delim("C:/Users/Owner/Box Sync/Analysis_CNV/ExomeCNV/results/X1G8.coverage.cnv.txt", header= TRUE, sep="\t", stringsAsFactors = FALSE)
+
 X1G6_ed <- read.delim("data/1G6_exomedepth_annotated_Conrad_somaticCNV.txt", header= TRUE, sep="\t", stringsAsFactors = FALSE)
 
 X1G8_ed <- read.delim("data/1G8_exomedepth_annotated_Conrad_somaticCNV.txt", header= TRUE, sep="\t", stringsAsFactors = FALSE)
-X1G6_ec <- read.delim("data/X1G6.coverage.cnv.txt", header= TRUE, sep="\t", stringsAsFactors = FALSE)
-X1G8_ec <- read.delim("data/X1G8.coverage.cnv.txt", header= TRUE, sep="\t", stringsAsFactors = FALSE)
+
+X1G6_ec <- read.delim("data/1G6_exomeCNV_anno.txt", header= TRUE, sep="\t", stringsAsFactors = FALSE)
+X1G8_ec <- read.delim("data/1G8_exomeCNV_anno.txt", header= TRUE, sep="\t", stringsAsFactors = FALSE)
 
 ed1 <- X1G6_ed %>%
   select(chromosome, start, end, width=end-start+1, type, nexons, BF, reads.ratio, gene=exons.hg19, cytoband)
@@ -53,12 +49,11 @@ ed2 <- X1G8_ed %>%
   select(chromosome, start, end, width=end-start+1, type, nexons, BF, reads.ratio, gene=exons.hg19, cytoband)
 
 
-
 #ExomeCNV results
-ec1 <- ec_cnv_anno %>%
+ec1 <- X1G6_ec %>%
   filter(sample=="X1G6") %>%
   mutate(type=ifelse(ratio>=1,"duplication", ifelse(ratio<1,"deletion", "")))
-ec2 <- ec_cnv_anno %>%
+ec2 <- X1G8_ec %>%
   filter(sample=="X1G8") %>%
   mutate(type=ifelse(ratio>=1,"duplication", ifelse(ratio<1,"deletion", "")))
 
