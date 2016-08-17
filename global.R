@@ -6,8 +6,7 @@ library(GenomicRanges)
 library(d3vennR)
 library(idr)
 source("rangeoverlapper.R")
-#credit for range overlapper to Girke Lab
-#http://faculty.ucr.edu/~tgirke/Documents/R_BioCond/My_R_Scripts/rangeoverlapper.R
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Prep ggbio hg19 circos files
 data("CRC", package = "biovizBase")
 seqlevels(hg19sub) <- paste0("chr", seqlevels(hg19sub))
@@ -68,7 +67,6 @@ ov_ec <-olRanges(query=makeGRangesFromDataFrame(ec1,start.field="probe_start", e
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Functions
 
-#------------------------------------------------------------------------------------
 venn_tooltip2<- function( venn ){
   venn$x$tasks[length(venn$x$tasks)+1] <- list(
     htmlwidgets::JS('
